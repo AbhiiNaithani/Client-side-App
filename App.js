@@ -10,18 +10,18 @@ import React from 'react';
 //import Home from './components/Home'
 //import Orders from './components/Orders'
 import NewProductscreen from './components/NewProduct_screen1';
-//import ProductListScreen from './components/productList_screen';
+import ProductListScreen from './components/productList_screen';
 class App extends React.Component {
 
   render() {  
-    console.log('Hello')
+    
   return (    
  //<BottomNav/>
  // <Home/>
  //<Orders/>
 
- //<ProductListScreen/>
- <NewProductscreen/>
+ <ProductListScreen/>
+ //<NewProductscreen/>
  );
 }
 }

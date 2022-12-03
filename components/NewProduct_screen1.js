@@ -40,13 +40,13 @@ function NewProductscreen ()
         <Text style={styles.imp}>*</Text>
         </View>
         <TextInput style={styles.Input}></TextInput>
-        <Text style={styles.hint}>breadth of final Package in cm</Text>
+        <Text style={styles.hint}>Breadth of final Package in cm</Text>
         <View style={{flexDirection:'row'}}>
         <Text style={styles.sub}>Package height</Text>
         <Text style={styles.imp}>*</Text>
         </View>
         <TextInput style={styles.Input}></TextInput>
-        <Text style={styles.hint}>height of final Package in cm</Text>
+        <Text style={styles.hint}>Weight of final Package in cm</Text>
         <View style={{flexDirection:'row'}}>
             
         <Text style={styles.sub}>Package weight</Text>
@@ -98,7 +98,7 @@ function NewProductscreen ()
    </View>
         <TextInput style={styles.Input}></TextInput>
    
-        <View style={{height:'26%'}}></View>
+        <View style={{padding:'16%'}}></View>
       </ScrollView>
       </SafeAreaView>
     );
