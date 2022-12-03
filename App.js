@@ -20,8 +20,8 @@ class App extends React.Component {
  // <Home/>
  //<Orders/>
 
- <ProductListScreen/>
- //<NewProductscreen/>
+ //<ProductListScreen/>
+ <NewProductscreen/>
  );
 }
 }

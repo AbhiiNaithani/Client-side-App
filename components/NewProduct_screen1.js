@@ -115,7 +115,9 @@ const styles = StyleSheet.create(
         fontSize:15,
         fontWeight:'italic',
         borderRadius:10,
-        color:'#000000',
+        color:'black',
+        backgroundColor:'#FFFFFF',
+        bordercolor:'#DADADA',
         marginLeft:'5%'
       },
       text:
@@ -142,6 +144,6 @@ const styles = StyleSheet.create(
       {marginLeft:'5%',
       Fontsize:3,
       color:'grey'}
-
+      
   }
 )
