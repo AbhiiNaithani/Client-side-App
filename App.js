@@ -6,11 +6,14 @@
  * @flow strict-local
  */
 import React from 'react';
+import AddNewProduct from './components/AddNewProduct';
+import AddNewProduct2 from './components/AddProduct2';
 //import BottomNav from './src/BottomNavbar' 
-//import Home from './components/Home'
-//import Orders from './components/Orders'
-import NewProductscreen from './components/NewProduct_screen1';
-import ProductListScreen from './components/productList_screen';
+import Home from './components/Home'
+import OrdersCard from './components/OrderCard';
+import OrdersList from './components/OrdersList';
+//import NewProductscreen from './components/NewProduct_screen1';
+//import ProductListScreen from './components/productList_screen';
 class App extends React.Component {
 
   render() {  
@@ -18,10 +21,11 @@ class App extends React.Component {
   return (    
  //<BottomNav/>
  // <Home/>
- //<Orders/>
-
+ //<OrdersList/>
+ //<AddNewProduct/>
  //<ProductListScreen/>
- <NewProductscreen/>
+ //<NewProductscreen/>
+ <AddNewProduct2/>
  );
 }
 }

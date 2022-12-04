@@ -33,7 +33,7 @@ function ProductListScreen() {
              <FlatList
                  numColumns={2}
                  data={products}
-                 keyExtractor={(item, index) => index.toString()}
+                 keyExtractor={(item, index) => index.toString}
               contentContainerStyle={{width: wp*1, justifyContent: 'space-evenly'}}
               renderItem={({ item }) => (<ProductCard item={item}/>)}></FlatList>
               
