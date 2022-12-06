@@ -1,15 +1,47 @@
 import React from 'react';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import OrdersList from '../components/OrdersList';
+import ProductListScreen from '../components/productList_screen';
 import Home from '../components/Home'
-class BottomNav extends React.Component {
-  render() {  
-  return (    
-    <createBottomTabNavigator.Navigator>
-    <createBottomTabNavigator.Screen name="Home" component={Home} />
-    {/* <Tab.Screen name="Settings" component={SettingsScreen} /> */}
-  </createBottomTabNavigator.Navigator>
+const Tab = createMaterialBottomTabNavigator();
+function BottomNavbar() {
+  return (
+    <Tab.Navigator
+      initialRouteName="Feed"
+      activeColor="#e91e63"
+      barStyle={{ backgroundColor: 'tomato' }}>
+      <Tab.Screen
+        name="Home"
+        component={Home}
+        options={{
+          tabBarLabel: 'Home',
+          tabBarIcon: ({ color }) => (
+            <MaterialCommunityIcons name="home" color={color} size={26} />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="Orders"
+        component={OrdersList}
+        options={{
+          tabBarLabel: 'Updates',
+          tabBarIcon: ({ color }) => (
+            <MaterialCommunityIcons name="bell" color={color} size={26} />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="Profile"
+        component={ProductListScreen}
+        options={{
+          tabBarLabel: 'Profile',
+          tabBarIcon: ({ color }) => (
+            <MaterialCommunityIcons name="account" color={color} size={26} />
+          ),
+        }}
+      />
+    </Tab.Navigator>
   );
 }
-}
-
-export default BottomNav;
+export default BottomNavbar;
