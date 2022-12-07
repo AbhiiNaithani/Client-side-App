@@ -1,6 +1,35 @@
 import React from "react";
 import { Text, View, SafeAreaView, TextInput,StyleSheet} from "react-native";
 import { ScrollView } from "react-native";
+
+obj=
+[  {
+    "productID": "111",
+    "sellerID": "000",
+    "manufacturerID": "ooo",
+    "SKUID": "SKUID",
+    "styleCode": "styleCode",
+    "packageHeight": 5,
+    "packageLength": 5,
+    "packageWeight": 5,
+    "packageWidth": 5,
+    "imageUrls": ["imageUrls"],
+    "specification": {"fit": "Regular", "index": 5,"Working": true},
+    "gender": "Male",
+    "brand": "brand",
+    "title": "title",
+    "description": "description",
+    "vertical": "vertical",
+    "category": "category",
+    "subCategory": "subCategory",
+    "price": 8,
+    "mrp": 8,
+    "stockCount": 6,
+    "variants": [],
+    "pickupAddress": {"firstLine": "Yo", "postalcode": 6666}
+}
+];
+
 function NewProductscreen ()
 {
     return (
@@ -14,7 +43,8 @@ function NewProductscreen ()
         <Text style={styles.sub}>MRP</Text>
         <Text style={styles.imp}>*</Text>
         </View>
-        <TextInput style={styles.Input}></TextInput>
+        <TextInput style={styles.Input} 
+          value={obj.mrp}/>
         <Text style={styles.hint}>Maximum retail Price of Products</Text>
         <View style={{flexDirection:'row'}}>
         <Text style={styles.sub}>Your Selling Price</Text>
@@ -97,11 +127,15 @@ function NewProductscreen ()
         <Text style={styles.imp}>*</Text>
    </View>
         <TextInput style={styles.Input}></TextInput>
-   
+        <Text>{obj.mrp}</Text>
         <View style={{padding:'16%'}}></View>
+    
       </ScrollView>
+    
       </SafeAreaView>
+    
     );
+    
 }
 export default NewProductscreen;
 const styles = StyleSheet.create(
