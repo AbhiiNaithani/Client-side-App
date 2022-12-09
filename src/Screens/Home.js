@@ -1,9 +1,56 @@
-import React from 'react';
 import {Text, View, Image, Dimensions} from 'react-native';
+import React ,{useEffect,useState}from "react";
+import {useSelector, useDispatch} from "react-redux"
+import { getorderinfo,getproduct_info } from "../store/action/productaction";
+import { GET_ORDER_INFO } from "../store/action/type";
+
 const wp = Dimensions.get('window').width;
 const hp = Dimensions.get('window').height;
 
 function Home() {
+  const dispatch = useDispatch();
+  const [orderinfo,setorderinfo] = useState([]);
+  const [productinfo,setproductinfo] = useState([]);
+  const [loading,setLoading] = useState(false);
+
+  let pendingorder = 0,outofstock=0,lowstock=0;
+  let index;
+
+
+
+  useEffect(()=>{
+    const getproduct = async()=>{
+      const json1 = await dispatch(getorderinfo(`m1`));
+      const json2 = await dispatch(getproduct_info(`m1`,``,`manufacturerID`));
+     
+      if(json1.success == true && json2.success == true){
+        setLoading(true);
+        setorderinfo(json1.msz)
+        setproductinfo(json2.msz)
+      }
+    }
+    getproduct();
+  },[])
+
+  if(loading){
+  
+
+    for (index = 0; index < orderinfo.length; index++)
+    {
+        if(orderinfo[index].orderStatus == "Pending"){
+          pendingorder++;
+        }
+        // console.log(orderinfo[index].orderStatus);
+      }
+      for(index = 0 ;index<productinfo.length;index++){
+        if(productinfo[index].stockCount == 0){
+          outofstock++;
+        }
+        if(productinfo[index].stockCount <= 50){
+          lowstock++;
+        }
+    }
+  }
   return (
     <View>
       <View
@@ -90,7 +137,7 @@ function Home() {
                 color: '#000000',
                 textAlign: 'center',
               }}>
-              0
+              {pendingorder}
             </Text>
           </View>
           <View
@@ -112,7 +159,7 @@ function Home() {
                 color: '#000000',
                 textAlign: 'center',
               }}>
-              0
+              {outofstock}
             </Text>
           </View>
           <View
@@ -134,7 +181,7 @@ function Home() {
                 color: '#000000',
                 textAlign: 'center',
               }}>
-              0
+             {lowstock}
             </Text>
           </View>
         </View>
