@@ -6,7 +6,11 @@ import Icon from 'react-native-vector-icons/FontAwesome5';
 
 import Home from './src/Screens/Home';
 import OrderScreen from './src/Screens/OrderScreen';
+<<<<<<< HEAD
 import ListingScreen from './src/Screens/ListingScreen';
+=======
+import ProductListScreen from './src/components/productList_screen';
+>>>>>>> 56dae3d29ce72db19d8e22b3e9ff48714f72d453
 
 const Tab = createMaterialBottomTabNavigator();
 function App() {
@@ -39,7 +43,11 @@ function App() {
         />
         <Tab.Screen
           name="Listings"
+<<<<<<< HEAD
           component={ListingScreen}
+=======
+          component={ProductListScreen}
+>>>>>>> 56dae3d29ce72db19d8e22b3e9ff48714f72d453
           options={{
             tabBarLabel: 'Listings',
             tabBarIcon: ({color}) => (

@@ -100,7 +100,6 @@ function OrdersList() {
     setAllSelected(!allSelected);
   }
 
-  console.log(products);
   return (
     <SafeAreaView style={styles.rootContainer}>
       <ScrollView>
