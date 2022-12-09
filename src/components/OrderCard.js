@@ -1,58 +1,70 @@
-import React from "react";
-import { Text, View, ScrollView ,StyleSheet,Dimensions,Image} from "react-native";
-import { Colors } from "react-native/Libraries/NewAppScreen";
+import React, {useState} from 'react';
+import {
+  Text,
+  View,
+  TouchableOpacity,
+  StyleSheet,
+  Dimensions,
+  FlatList,
+} from 'react-native';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import OrderedProduct from './OrderedProduct';
+
 const wp = Dimensions.get('window').width;
-const hp = Dimensions.get('window').height;
-function OrderCard({item})
-{
-    // const [selected,setselected]=useState([]);
-    // function isselected(marked)
-    // {
-    //     if(selected.includes(marked))
-    //     {
-    //         setselected(selected.filter(selected=>selected!==setselected))
-    //         return ;
-    //     }
-    //     setselected(selected=>selected.concat(setselected))
-    // }
-    return (
-        <View style={{borderWidth:2,bordercolor:'#D9D9D9'}}>
-        <View style={{flexDirection:'row',justifyContent:'space-between'}}>
-        <Image style={styles.Img} source={{ uri: item.productImage }} />
-               <View style={{marginRight:'4%',justifyContent:'center'}}>
-                <Text style={styles.subhead}>{item.brand}</Text>
-                <Text style={styles.subhead}>{item.name}</Text>
-                <Text>Order ID: <Text>234567</Text></Text>
-                <Text>Product ID: <Text>234567</Text></Text>
-                <Text>Quantity: <Text>2</Text></Text>
-                    <Text style={styles.subhead}>{item.price}</Text>
-                    </View>
-                    </View>
-                </View> 
-        
-    );
+
+function OrderCard({item}) {
+  const [isSelected, setIsSelected] = useState(false);
+
+  function selectionHandler() {
+    setIsSelected(!isSelected);
+  }
+
+  //   console.log(items);
+  return (
+    <View style={styles.card}>
+      <View style={styles.selectionBar}>
+        <TouchableOpacity onPress={selectionHandler}>
+          {
+            <Icon
+              name={isSelected ? 'checkbox-marked' : 'checkbox-blank-outline'}
+              size={24}
+              color={isSelected ? '#3F2B96' : '#3F2B96'}
+            />
+          }
+        </TouchableOpacity>
+        <Text style={styles.text}>Order No. {item.orderNo}</Text>
+      </View>
+      <View>
+        <FlatList
+          data={item.items}
+          key={item.orderNo}
+          renderItem={({item}) => <OrderedProduct item={item} />}
+        />
+      </View>
+    </View>
+  );
 }
 export default OrderCard;
 
-const styles=StyleSheet.create(
-    {
-    text:
-    {
-        fontWeight:'bold',
-        Color:'#000000',
-        fontSize:17
-    },
-    subhead:
-    {
-        fontWeight:'bold',
-        Color:'black',
-        fontSize:12
-    },
-    Img: {
-        backgroundColor: 'pink',
-        width: 0.35*wp,
-        height: 0.26*hp,
-    
-    }
-}
-)
+const styles = StyleSheet.create({
+  card: {
+    elevation: 4,
+    marginBottom: wp * 0.01,
+    backgroundColor: 'white',
+  },
+  selectionBar: {
+    height: wp * 0.12,
+    alignItems: 'center',
+    width: '100%',
+    padding: wp * 0.025,
+    backgroundColor: 'white',
+    flexDirection: 'row',
+  },
+  text: {
+    color: 'black',
+    fontSize: wp * 0.035,
+    marginLeft: wp * 0.015,
+    fontWeight: 'bold',
+    fontFamily: 'Montserrat',
+  },
+});

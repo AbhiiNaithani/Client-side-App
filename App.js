@@ -6,6 +6,7 @@ import Icon from 'react-native-vector-icons/FontAwesome5';
 
 import Home from './src/Screens/Home';
 import OrderScreen from './src/Screens/OrderScreen';
+
 const Tab = createMaterialBottomTabNavigator();
 function App() {
   const layout = useWindowDimensions();
