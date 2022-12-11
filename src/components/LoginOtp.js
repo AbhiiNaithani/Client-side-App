@@ -7,25 +7,16 @@ import {
   TouchableOpacity,
   SafeAreaView,
 } from 'react-native';
-import React, {useState} from 'react';
 import LinearGradient from 'react-native-linear-gradient';
+import React, {useState} from 'react';
 
 const wp = Dimensions.get('window').width;
 
-export default function SignUpDetails() {
+export default function LoginOtp() {
   const [otp, setOtp] = useState('');
-  const [name, setName] = useState('');
-  const [password, setPassword] = useState('');
 
   function otpHandler(inputText) {
     setOtp(inputText);
-  }
-  function nameHandler(inputText) {
-    setName(inputText);
-  }
-
-  function inputPassHandler(inputText) {
-    setPassword(inputText);
   }
 
   function pressIndicator() {
@@ -78,13 +69,13 @@ export default function SignUpDetails() {
                 marginTop: wp * 0.05,
               },
             ]}>
-            Signup
+            Login
           </Text>
           <View
             style={{
               flexDirection: 'row',
               justifyContent: 'space-between',
-              marginTop: wp * 0.06,
+              marginTop: wp * 0.08,
             }}>
             <Text style={[styles.text, {fontWeight: '500'}]}>
               Mobile Number{'  '}
@@ -135,59 +126,9 @@ export default function SignUpDetails() {
               value={otp}
             />
           </View>
-          <Text
-            style={[
-              styles.text,
-              {
-                marginTop: wp * 0.04,
-                marginLeft: wp * 0.005,
-                marginBottom: wp * 0.01,
-              },
-            ]}>
-            Enter Name
-          </Text>
-          <View style={[styles.input]}>
-            <TextInput
-              placeholder="Your Name"
-              placeholderTextColor={'#DADADA'}
-              style={{
-                height: wp * 0.1,
-                width: '85%',
-                color: 'black',
-                textAlignVertical: 'center',
-                marginTop: wp * 0.015,
-              }}
-              onChangeText={nameHandler}
-              value={name}
-            />
-          </View>
-          <Text
-            style={[
-              styles.text,
-              {
-                marginTop: wp * 0.04,
-                marginLeft: wp * 0.005,
-                marginBottom: wp * 0.01,
-              },
-            ]}>
-            Set Password
-          </Text>
-          <View style={styles.input}>
-            <TextInput
-              placeholder="Your Password"
-              placeholderTextColor={'#DADADA'}
-              style={{
-                height: wp * 0.1,
-                width: '90%',
-                color: 'black',
-              }}
-              onChangeText={inputPassHandler}
-              value={password}
-            />
-          </View>
 
           <View
-            style={{marginVertical: wp * 0.05, marginHorizontal: wp * 0.055}}>
+            style={{marginVertical: wp * 0.075, marginHorizontal: wp * 0.05}}>
             <TouchableOpacity
               activeOpacity={0.8}
               style={[
@@ -199,26 +140,40 @@ export default function SignUpDetails() {
               <View>
                 <Text
                   style={[styles.text, {color: 'white', fontSize: wp * 0.04}]}>
-                  Sign Up
+                  Login
                 </Text>
               </View>
             </TouchableOpacity>
           </View>
 
           <Text
+            onPress={pressIndicator}
             style={[
               styles.text,
               {
-                color: '#7465B6',
+                color: '#3F2B96',
                 alignSelf: 'center',
                 marginVertical: wp * 0.01,
               },
             ]}>
-            Already An Existing User?{' '}
+            Login using password?
+          </Text>
+          <Text
+            style={{
+              fontSize: wp * 0.032,
+              color: '#7465B6',
+              alignSelf: 'center',
+              fontWeight: 'bold',
+              marginVertical: wp * 0.02,
+            }}>
+            OR
+          </Text>
+          <Text style={[styles.text, {color: '#3F2B96', alignSelf: 'center'}]}>
+            New to Commerece?{' '}
             <Text
-              style={[styles.text, {color: '#7465B6'}]}
+              style={[styles.text, {color: '#3F2B96'}]}
               onPress={pressIndicator}>
-              Login
+              Create Account
             </Text>
           </Text>
         </View>
@@ -231,10 +186,10 @@ const styles = StyleSheet.create({
   card: {
     backgroundColor: 'white',
     position: 'absolute',
-    bottom: wp * 0.08,
+    bottom: wp * 0.1,
     alignSelf: 'center',
     width: '90%',
-    height: wp * 1.15,
+    height: wp * 1,
     paddingHorizontal: wp * 0.12,
     borderRadius: wp * 0.03,
     elevation: 4,

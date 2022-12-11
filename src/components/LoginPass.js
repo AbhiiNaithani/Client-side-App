@@ -12,16 +12,12 @@ import LinearGradient from 'react-native-linear-gradient';
 
 const wp = Dimensions.get('window').width;
 
-export default function SignUpDetails() {
-  const [otp, setOtp] = useState('');
-  const [name, setName] = useState('');
+export default function LoginPass() {
+  const [mobNum, setMobNum] = useState('');
   const [password, setPassword] = useState('');
 
-  function otpHandler(inputText) {
-    setOtp(inputText);
-  }
-  function nameHandler(inputText) {
-    setName(inputText);
+  function inputNumHandler(inputText) {
+    setMobNum(inputText);
   }
 
   function inputPassHandler(inputText) {
@@ -73,55 +69,34 @@ export default function SignUpDetails() {
               styles.text,
               {
                 alignSelf: 'center',
-                color: '#7465B6',
+                color: '#3F2B96',
                 fontSize: wp * 0.05,
                 marginTop: wp * 0.05,
               },
             ]}>
-            Signup
+            Login
           </Text>
-          <View
-            style={{
-              flexDirection: 'row',
-              justifyContent: 'space-between',
-              marginTop: wp * 0.06,
-            }}>
-            <Text style={[styles.text, {fontWeight: '500'}]}>
-              Mobile Number{'  '}
-              <Text
-                style={{
-                  fontSize: wp * 0.032,
-                  color: '#7465B6',
-                  fontWeight: 'bold',
-                }}>
-                {'+91 1234567890'}
-              </Text>
-            </Text>
-            <Text
-              onPress={pressIndicator}
-              style={[styles.text, {color: '#3F2B96'}]}>
-              Change?
-            </Text>
-          </View>
           <Text
             style={[
               styles.text,
               {
-                marginTop: wp * 0.06,
+                marginTop: wp * 0.04,
                 marginLeft: wp * 0.005,
                 marginBottom: wp * 0.01,
               },
             ]}>
-            Enter OTP
+            Enter Mobile Number
           </Text>
           <View style={[styles.input, {flexDirection: 'row'}]}>
             <Text
               style={[
                 styles.text,
                 {color: '#DADADA', alignSelf: 'center', fontSize: wp * 0.04},
-              ]}></Text>
+              ]}>
+              +91 |
+            </Text>
             <TextInput
-              placeholder="OTP"
+              placeholder="Mobile Number"
               placeholderTextColor={'#DADADA'}
               keyboardType="number-pad"
               style={{
@@ -131,8 +106,8 @@ export default function SignUpDetails() {
                 textAlignVertical: 'center',
                 marginTop: wp * 0.015,
               }}
-              onChangeText={otpHandler}
-              value={otp}
+              onChangeText={inputNumHandler}
+              value={mobNum}
             />
           </View>
           <Text
@@ -144,33 +119,7 @@ export default function SignUpDetails() {
                 marginBottom: wp * 0.01,
               },
             ]}>
-            Enter Name
-          </Text>
-          <View style={[styles.input]}>
-            <TextInput
-              placeholder="Your Name"
-              placeholderTextColor={'#DADADA'}
-              style={{
-                height: wp * 0.1,
-                width: '85%',
-                color: 'black',
-                textAlignVertical: 'center',
-                marginTop: wp * 0.015,
-              }}
-              onChangeText={nameHandler}
-              value={name}
-            />
-          </View>
-          <Text
-            style={[
-              styles.text,
-              {
-                marginTop: wp * 0.04,
-                marginLeft: wp * 0.005,
-                marginBottom: wp * 0.01,
-              },
-            ]}>
-            Set Password
+            Enter Password
           </Text>
           <View style={styles.input}>
             <TextInput
@@ -185,40 +134,110 @@ export default function SignUpDetails() {
               value={password}
             />
           </View>
-
+          <Text
+            style={[
+              styles.text,
+              {
+                fontSize: wp * 0.025,
+                marginTop: wp * 0.04,
+                marginHorizontal: wp * 0.03,
+                marginBottom: wp * 0.01,
+              },
+            ]}>
+            By continuing, you agree to our{' '}
+            <Text
+              style={[
+                styles.text,
+                {
+                  fontSize: wp * 0.025,
+                  color: '#7465B6',
+                  textDecorationLine: 'underline',
+                },
+              ]}
+              onPress={pressIndicator}>
+              Terms of Use
+            </Text>{' '}
+            and{' '}
+            <Text
+              style={[
+                styles.text,
+                {
+                  fontSize: wp * 0.025,
+                  color: '#7465B6',
+                  textDecorationLine: 'underline',
+                },
+              ]}
+              onPress={pressIndicator}>
+              Privacy Policy.
+            </Text>
+          </Text>
           <View
-            style={{marginVertical: wp * 0.05, marginHorizontal: wp * 0.055}}>
+            style={{marginHorizontal: wp * 0.04, marginVertical: wp * 0.04}}>
+            <View>
+              <TouchableOpacity
+                activeOpacity={0.8}
+                style={[
+                  styles.button,
+                  {
+                    backgroundColor: '#7465B6',
+                  },
+                ]}>
+                <View>
+                  <Text
+                    style={[
+                      styles.text,
+                      {color: 'white', fontSize: wp * 0.04},
+                    ]}>
+                    Login
+                  </Text>
+                </View>
+              </TouchableOpacity>
+            </View>
+            <Text
+              style={[
+                styles.text,
+                {
+                  color: '#7465B6',
+                  alignSelf: 'center',
+                  marginVertical: wp * 0.02,
+                },
+              ]}>
+              OR
+            </Text>
+
             <TouchableOpacity
               activeOpacity={0.8}
               style={[
                 styles.button,
                 {
-                  backgroundColor: '#7465B6',
+                  backgroundColor: 'white',
                 },
               ]}>
               <View>
                 <Text
-                  style={[styles.text, {color: 'white', fontSize: wp * 0.04}]}>
-                  Sign Up
+                  style={[
+                    styles.text,
+                    {color: '#7465B6', fontSize: wp * 0.04},
+                  ]}>
+                  Request OTP
                 </Text>
               </View>
             </TouchableOpacity>
           </View>
-
           <Text
             style={[
               styles.text,
               {
                 color: '#7465B6',
                 alignSelf: 'center',
-                marginVertical: wp * 0.01,
+                marginVertical: wp * 0.04,
               },
             ]}>
-            Already An Existing User?{' '}
+            New to Commerce?{' '}
             <Text
               style={[styles.text, {color: '#7465B6'}]}
               onPress={pressIndicator}>
-              Login
+              Create Account
             </Text>
           </Text>
         </View>

@@ -7,7 +7,6 @@ import Icon from 'react-native-vector-icons/FontAwesome5';
 import Home from './src/Screens/Home';
 import OrderScreen from './src/Screens/OrderScreen';
 import ListingScreen from './src/Screens/ListingScreen';
-// import SignUpDetails from './src/components/SignUpDetails';
 
 const Tab = createMaterialBottomTabNavigator();
 function App() {
@@ -74,9 +73,6 @@ function App() {
         />
       </Tab.Navigator>
     </NavigationContainer>
-    // <SafeAreaView style={{flex: 1, backgroundColor: '#A8C0FF'}}>
-    //   <SignUpDetails />
-    // </SafeAreaView>
   );
 }
 export default App;

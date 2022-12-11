@@ -12,20 +12,11 @@ import LinearGradient from 'react-native-linear-gradient';
 
 const wp = Dimensions.get('window').width;
 
-export default function SignUpDetails() {
-  const [otp, setOtp] = useState('');
-  const [name, setName] = useState('');
-  const [password, setPassword] = useState('');
+export default function SignUp() {
+  const [mobNum, setMobNum] = useState('');
 
-  function otpHandler(inputText) {
-    setOtp(inputText);
-  }
-  function nameHandler(inputText) {
-    setName(inputText);
-  }
-
-  function inputPassHandler(inputText) {
-    setPassword(inputText);
+  function inputNumHandler(inputText) {
+    setMobNum(inputText);
   }
 
   function pressIndicator() {
@@ -80,48 +71,28 @@ export default function SignUpDetails() {
             ]}>
             Signup
           </Text>
-          <View
-            style={{
-              flexDirection: 'row',
-              justifyContent: 'space-between',
-              marginTop: wp * 0.06,
-            }}>
-            <Text style={[styles.text, {fontWeight: '500'}]}>
-              Mobile Number{'  '}
-              <Text
-                style={{
-                  fontSize: wp * 0.032,
-                  color: '#7465B6',
-                  fontWeight: 'bold',
-                }}>
-                {'+91 1234567890'}
-              </Text>
-            </Text>
-            <Text
-              onPress={pressIndicator}
-              style={[styles.text, {color: '#3F2B96'}]}>
-              Change?
-            </Text>
-          </View>
+
           <Text
             style={[
               styles.text,
               {
-                marginTop: wp * 0.06,
+                marginTop: wp * 0.1,
                 marginLeft: wp * 0.005,
                 marginBottom: wp * 0.01,
               },
             ]}>
-            Enter OTP
+            Enter Mobile Number
           </Text>
           <View style={[styles.input, {flexDirection: 'row'}]}>
             <Text
               style={[
                 styles.text,
                 {color: '#DADADA', alignSelf: 'center', fontSize: wp * 0.04},
-              ]}></Text>
+              ]}>
+              +91 |
+            </Text>
             <TextInput
-              placeholder="OTP"
+              placeholder="Mobile Number"
               placeholderTextColor={'#DADADA'}
               keyboardType="number-pad"
               style={{
@@ -131,63 +102,13 @@ export default function SignUpDetails() {
                 textAlignVertical: 'center',
                 marginTop: wp * 0.015,
               }}
-              onChangeText={otpHandler}
-              value={otp}
-            />
-          </View>
-          <Text
-            style={[
-              styles.text,
-              {
-                marginTop: wp * 0.04,
-                marginLeft: wp * 0.005,
-                marginBottom: wp * 0.01,
-              },
-            ]}>
-            Enter Name
-          </Text>
-          <View style={[styles.input]}>
-            <TextInput
-              placeholder="Your Name"
-              placeholderTextColor={'#DADADA'}
-              style={{
-                height: wp * 0.1,
-                width: '85%',
-                color: 'black',
-                textAlignVertical: 'center',
-                marginTop: wp * 0.015,
-              }}
-              onChangeText={nameHandler}
-              value={name}
-            />
-          </View>
-          <Text
-            style={[
-              styles.text,
-              {
-                marginTop: wp * 0.04,
-                marginLeft: wp * 0.005,
-                marginBottom: wp * 0.01,
-              },
-            ]}>
-            Set Password
-          </Text>
-          <View style={styles.input}>
-            <TextInput
-              placeholder="Your Password"
-              placeholderTextColor={'#DADADA'}
-              style={{
-                height: wp * 0.1,
-                width: '90%',
-                color: 'black',
-              }}
-              onChangeText={inputPassHandler}
-              value={password}
+              onChangeText={inputNumHandler}
+              value={mobNum}
             />
           </View>
 
           <View
-            style={{marginVertical: wp * 0.05, marginHorizontal: wp * 0.055}}>
+            style={{marginVertical: wp * 0.1, marginHorizontal: wp * 0.055}}>
             <TouchableOpacity
               activeOpacity={0.8}
               style={[
@@ -209,14 +130,14 @@ export default function SignUpDetails() {
             style={[
               styles.text,
               {
-                color: '#7465B6',
+                color: '#3F2B96',
                 alignSelf: 'center',
                 marginVertical: wp * 0.01,
               },
             ]}>
             Already An Existing User?{' '}
             <Text
-              style={[styles.text, {color: '#7465B6'}]}
+              style={[styles.text, {color: '#3F2B96'}]}
               onPress={pressIndicator}>
               Login
             </Text>
@@ -231,10 +152,10 @@ const styles = StyleSheet.create({
   card: {
     backgroundColor: 'white',
     position: 'absolute',
-    bottom: wp * 0.08,
+    bottom: wp * 0.15,
     alignSelf: 'center',
     width: '90%',
-    height: wp * 1.15,
+    height: wp * 0.85,
     paddingHorizontal: wp * 0.12,
     borderRadius: wp * 0.03,
     elevation: 4,
