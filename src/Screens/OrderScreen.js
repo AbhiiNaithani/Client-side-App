@@ -2,10 +2,11 @@ import React, {useState} from 'react';
 import {View, useWindowDimensions, SafeAreaView} from 'react-native';
 import {TabView, SceneMap, TabBar} from 'react-native-tab-view';
 import OrdersList from '../components/OrdersList';
+import OrderInfoList from '../components/OrderInfoList';
 
 const PendingRoute = () => (
   <SafeAreaView>
-    <OrdersList />
+    <OrderInfoList />
   </SafeAreaView>
 );
 

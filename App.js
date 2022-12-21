@@ -7,6 +7,10 @@ import Icon from 'react-native-vector-icons/FontAwesome5';
 import Home from './src/Screens/Home';
 import OrderScreen from './src/Screens/OrderScreen';
 import ListingScreen from './src/Screens/ListingScreen';
+import LoginOtp from './src/components/LoginOtp';
+import LoginPass from './src/components/LoginPass';
+import SignUp from './src/components/SignUp';
+import SignUpDetails from './src/components/SignUpDetails';
 
 const Tab = createMaterialBottomTabNavigator();
 function App() {
@@ -73,6 +77,10 @@ function App() {
         />
       </Tab.Navigator>
     </NavigationContainer>
+    // <LoginOtp />
+    // <LoginPass/>
+    // <SignUp/>
+    // <SignUpDetails/>
   );
 }
 export default App;

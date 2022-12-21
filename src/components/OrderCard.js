@@ -19,7 +19,7 @@ function OrderCard({item}) {
     setIsSelected(!isSelected);
   }
 
-  //   console.log(items);
+  // console.log(items);
   return (
     <View style={styles.card}>
       <View style={styles.selectionBar}>
@@ -32,12 +32,11 @@ function OrderCard({item}) {
             />
           }
         </TouchableOpacity>
-        <Text style={styles.text}>Order No. {item.orderNo}</Text>
+        <Text style={styles.text}>Order No. {item.orderNo} </Text>
       </View>
       <View>
         <FlatList
           data={item.items}
-          key={item.orderNo}
           renderItem={({item}) => <OrderedProduct item={item} />}
         />
       </View>
