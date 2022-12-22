@@ -1,16 +1,22 @@
 import React, {useState} from 'react';
 import {View, useWindowDimensions, SafeAreaView} from 'react-native';
 import {TabView, SceneMap, TabBar} from 'react-native-tab-view';
+import DraftsList from '../components/DraftsList';
 import ProductList from '../components/ProductList';
+import RequestedList from '../components/RequestedList';
 
 const MyProductsRoute = () => <ProductList />;
 
 const InProgressRoute = () => (
-  <View style={{flex: 1, backgroundColor: '#673ab7'}} />
+  <View style={{flex: 1, backgroundColor: 'white'}}>
+    <RequestedList />
+  </View>
 );
 
 const DraftsRoute = () => (
-  <View style={{flex: 1, backgroundColor: '#673ab7'}} />
+  <View style={{flex: 1, backgroundColor: 'white'}}>
+    <DraftsList />
+  </View>
 );
 
 export default function ListingScreen() {
