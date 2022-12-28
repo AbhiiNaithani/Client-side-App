@@ -73,9 +73,9 @@ function DraftsList() {
           </TouchableOpacity>
           <View
             style={{
-              flex: 2.7,
+              width: wp * 0.48,
               flexDirection: 'row',
-              justifyContent: 'space-around',
+              justifyContent: 'center',
               alignItems: 'center',
             }}>
             <Text style={styles.text}> Product Information</Text>
@@ -83,13 +83,16 @@ function DraftsList() {
 
           <View
             style={{
-              flex: 1,
+              width: wp * 0.2,
+              justifyContent: 'center',
             }}>
             <Text style={styles.text}>Created On</Text>
           </View>
           <View
             style={{
-              flex: 1.2,
+              width: wp * 0.22,
+              justifyContent: 'center',
+              // alignItems: 'center',
             }}>
             <Text style={styles.text}> Modified On</Text>
           </View>

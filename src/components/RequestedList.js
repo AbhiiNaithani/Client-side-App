@@ -71,7 +71,7 @@ function RequestedList() {
           </TouchableOpacity>
           <View
             style={{
-              flex: 3,
+              width: wp * 0.4,
               flexDirection: 'row',
               justifyContent: 'space-around',
               alignItems: 'center',
@@ -80,19 +80,22 @@ function RequestedList() {
           </View>
           <View
             style={{
-              flex: 1,
+              width: wp * 0.15,
+              alignItems: 'center',
             }}>
             <Text style={styles.text}> Type</Text>
           </View>
           <View
             style={{
-              flex: 1,
+              width: wp * 0.15,
+              alignItems: 'center',
             }}>
             <Text style={styles.text}> Status</Text>
           </View>
           <View
             style={{
-              flex: 1.5,
+              width: wp * 0.2,
+              alignItems: 'center',
             }}>
             <Text style={styles.text}>Created On</Text>
           </View>

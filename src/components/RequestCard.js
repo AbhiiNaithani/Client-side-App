@@ -5,11 +5,13 @@ import {
   Dimensions,
   TouchableOpacity,
   Image,
+  Alert,
 } from 'react-native';
 import React, {useState} from 'react';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 const wp = Dimensions.get('window').width;
+const hp = Dimensions.get('window').height;
 
 export default function RequestCard({item}) {
   const status = item.status;
@@ -21,9 +23,13 @@ export default function RequestCard({item}) {
   }
 
   const [isSelected, setIsSelected] = useState(false);
+  const [isClicked, setIsClicked] = useState(false);
 
   function selectionHandler() {
     setIsSelected(!isSelected);
+  }
+  function OptionsHandler() {
+    setIsClicked(true);
   }
 
   return (
@@ -44,7 +50,7 @@ export default function RequestCard({item}) {
       </TouchableOpacity>
       <View
         style={{
-          flex: 3.4,
+          width: wp * 0.44,
           borderRightWidth: wp * 0.005,
           borderRightColor: '#7465B6',
         }}>
@@ -70,10 +76,14 @@ export default function RequestCard({item}) {
         </View>
         <View style={{flexDirection: 'row'}}>
           <Text style={styles.text}>{item.brand}</Text>
-          <Text style={[styles.text, {fontWeight: '400', fontSize: wp * 0.03}]}>
-            {item.name}
-          </Text>
+          <View style={{width: wp * 0.4}}>
+            <Text
+              style={[styles.text, {fontWeight: '400', fontSize: wp * 0.03}]}>
+              {item.name}
+            </Text>
+          </View>
         </View>
+
         <Text
           style={[
             styles.text,
@@ -84,7 +94,7 @@ export default function RequestCard({item}) {
       </View>
       <View
         style={{
-          flex: 1,
+          width: wp * 0.14,
           justifyContent: 'center',
           alignItems: 'center',
           borderRightWidth: wp * 0.005,
@@ -96,7 +106,7 @@ export default function RequestCard({item}) {
       </View>
       <View
         style={{
-          flex: 1.2,
+          width: wp * 0.16,
           justifyContent: 'center',
           alignItems: 'center',
           borderRightWidth: wp * 0.005,
@@ -108,7 +118,7 @@ export default function RequestCard({item}) {
       </View>
       <View
         style={{
-          flex: 1.4,
+          width: wp * 0.17,
           justifyContent: 'center',
           alignItems: 'center',
           borderRightWidth: wp * 0.005,
@@ -118,10 +128,34 @@ export default function RequestCard({item}) {
           {item.createdOn}
         </Text>
       </View>
-      <View style={{flex: 0.3, justifyContent: 'center', alignItems: 'center'}}>
-        <TouchableOpacity>
-          <Icon name="dots-vertical" size={wp * 0.045} color="#9747FF" />
+      <View
+        style={{
+          width: wp * 0.05,
+
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}>
+        <TouchableOpacity activeOpacity={0.8} onPress={OptionsHandler}>
+          <Icon name="dots-vertical" size={wp * 0.06} color="#9747FF" />
         </TouchableOpacity>
+        {isClicked ? (
+          <View
+            style={{
+              position: 'absolute',
+              right: wp * 0.036,
+              top: hp * 0.06,
+              height: hp * 0.06,
+              width: wp * 0.2,
+              backgroundColor: '#D0C7F6',
+              justifyContent: 'center',
+              alignItems: 'center',
+              zIndex: 100,
+            }}>
+            <Text onPress={() => setIsClicked(false)} style={[styles.text]}>
+              See Report
+            </Text>
+          </View>
+        ) : null}
       </View>
     </View>
   );
