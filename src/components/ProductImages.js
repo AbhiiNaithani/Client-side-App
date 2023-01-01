@@ -11,7 +11,8 @@ import {
   PermissionsAndroid,
   FlatList,
 } from 'react-native';
-import React, {useCallback, useEffect, useState} from 'react';
+import React, {useState} from 'react';
+import UploadOptions from './UploadOptions';
 
 import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
 
@@ -21,7 +22,7 @@ const hp = Dimensions.get('window').height;
 export default function ProductImages() {
   const dottedBorder =
     'https://cdn.pixabay.com/photo/2018/11/13/21/43/instagram-3814051__340.png';
-  let initialList = [
+  let productInitialList = [
     {uri: dottedBorder},
     {uri: dottedBorder},
     {uri: dottedBorder},
@@ -29,10 +30,23 @@ export default function ProductImages() {
     {uri: dottedBorder},
     {uri: dottedBorder},
   ];
+  let lableInitialList = [
+    {uri: dottedBorder},
+    {uri: dottedBorder},
+    {uri: dottedBorder},
+  ];
+  let highlightImgList = [
+    {uri: dottedBorder},
+    {uri: dottedBorder},
+    {uri: dottedBorder},
+    {uri: dottedBorder},
+  ];
 
-  const [isUploadBtnClicked, setisUploadBtnClicked] = useState(false);
-  const [imageList, setImageList] = useState(initialList);
-  const [currIndex, setCurrIndex] = useState(0);
+  const [isProdUploadBtnClicked, setIsProdUploadBtnClicked] = useState(false);
+  const [isLabUploadBtnClicked, setIsLabUploadBtnClicked] = useState(false);
+  const [productImageList, setProductImageList] = useState(productInitialList);
+  const [lableImageList, setLableImageList] = useState(lableInitialList);
+  const [currUrl, setCurrUrl] = useState(dottedBorder);
 
   const requestExternalWritePermission = async () => {
     if (Platform.OS === 'android') {
@@ -54,11 +68,15 @@ export default function ProductImages() {
     } else return true;
   };
 
-  function UploadBtnHandler() {
-    setisUploadBtnClicked(true);
+  function ProdUploadBtnHandler() {
+    setIsProdUploadBtnClicked(true);
   }
 
-  const TakePhotoHandler = async () => {
+  function LabUploadBtnHandler() {
+    setIsLabUploadBtnClicked(true);
+  }
+
+  const TakePhotoHandler = async location => {
     let options = {
       storageOptions: {
         path: 'images',
@@ -86,25 +104,39 @@ export default function ProductImages() {
         }
 
         response.assets.map(image => {
-          for (let index = 0; index < imageList.length; index++) {
-            if (imageList[index].uri === dottedBorder) {
-              imageList[index].uri = image.uri;
-              setCurrIndex(index);
+          if (location === 'product') {
+            for (let index = 0; index < productImageList.length; index++) {
+              if (productImageList[index].uri === dottedBorder) {
+                productImageList[index].uri = image.uri;
+                setCurrUrl(image.uri);
 
-              break;
+                break;
+              }
             }
+
+            setProductImageList(productImageList);
+            setIsProdUploadBtnClicked(false);
+          } else if (location === 'lable') {
+            for (let index = 0; index < lableImageList.length; index++) {
+              if (lableImageList[index].uri === dottedBorder) {
+                lableImageList[index].uri = image.uri;
+                setCurrUrl(image.uri);
+
+                break;
+              }
+            }
+
+            setLableImageList(lableImageList);
+            setIsLabUploadBtnClicked(false);
           }
         });
-
-        setImageList(imageList);
-        setisUploadBtnClicked(false);
       });
     }
   };
 
-  const PhotoFromGalleryHandler = async type => {
+  const PhotoFromGalleryHandler = async location => {
     let options = {
-      mediaType: type,
+      mediaType: 'mixed',
       selectionLimit: 6,
 
       quality: 1,
@@ -128,27 +160,43 @@ export default function ProductImages() {
           return;
         }
         response.assets.map(image => {
-          for (let index = 0; index < imageList.length; index++) {
-            if (imageList[index].uri === dottedBorder) {
-              imageList[index].uri = image.uri;
-              setCurrIndex(index);
+          if (location === 'product') {
+            for (let index = 0; index < productImageList.length; index++) {
+              if (productImageList[index].uri === dottedBorder) {
+                productImageList[index].uri = image.uri;
+                setCurrUrl(image.uri);
 
-              break;
+                break;
+              }
             }
-          }
 
-          setImageList(imageList);
-          setisUploadBtnClicked(false);
+            setProductImageList(productImageList);
+            setIsProdUploadBtnClicked(false);
+          } else if (location === 'lable') {
+            for (let index = 0; index < lableImageList.length; index++) {
+              if (lableImageList[index].uri === dottedBorder) {
+                lableImageList[index].uri = image.uri;
+                setCurrUrl(image.uri);
+
+                break;
+              }
+            }
+
+            setLableImageList(lableImageList);
+            setIsLabUploadBtnClicked(false);
+          }
         });
       });
     }
   };
   function CancelHandler() {
-    setisUploadBtnClicked(false);
+    setIsProdUploadBtnClicked(false);
+    setIsLabUploadBtnClicked(false);
   }
   return (
     <ScrollView>
-      <View style={{flex: 1, backgroundColor: 'white'}}>
+      <View
+        style={{flex: 1, backgroundColor: 'white', paddingBottom: hp * 0.1}}>
         <Text
           style={[
             styles.text,
@@ -164,16 +212,48 @@ export default function ProductImages() {
           onPress={() => console.log('Pressed')}>
           View Guidelines
         </Text>
-        <View style={styles.Box}>
-          <Image
-            style={[styles.BoxImg]}
-            source={{
-              uri: imageList[currIndex].uri,
+        <View
+          style={{
+            flexDirection: 'row',
+            paddingHorizontal: wp * 0.05,
+            alignItems: 'center',
+          }}>
+          <FlatList
+            data={highlightImgList}
+            numColumns={2}
+            renderItem={({item, index}) => {
+              // return console.log(item.fileName);
+
+              return (
+                <TouchableOpacity key={index} style={[styles.smallBox]}>
+                  <Image
+                    source={{
+                      uri: item.uri,
+                    }}
+                    resizeMode="cover"
+                    style={[
+                      {
+                        height: hp * 0.055,
+                        width: hp * 0.055,
+                        borderRadius: wp * 0.01,
+
+                        alignSelf: 'center',
+                      },
+                    ]}
+                  />
+                </TouchableOpacity>
+              );
             }}
-            resizeMode="contain"
           />
+          <View style={styles.Box}>
+            <Image
+              source={{uri: currUrl}}
+              resizeMode="center"
+              style={styles.BoxImg}
+            />
+          </View>
         </View>
-        <TouchableOpacity activeOpacity={0.8} onPress={UploadBtnHandler}>
+        <TouchableOpacity activeOpacity={0.8} onPress={ProdUploadBtnHandler}>
           <View style={styles.btn}>
             <Text
               style={{color: 'white', fontWeight: 'bold', fontSize: wp * 0.04}}>
@@ -181,42 +261,16 @@ export default function ProductImages() {
             </Text>
           </View>
         </TouchableOpacity>
-        {isUploadBtnClicked ? (
-          <View style={styles.optionContainer}>
-            <TouchableOpacity
-              activeOpacity={0.8}
-              style={styles.optionBtn}
-              onPress={() => {
-                TakePhotoHandler();
-              }}>
-              <View>
-                <Text style={[styles.text, {marginTop: 0, color: '#7465B6'}]}>
-                  Take Photo
-                </Text>
-              </View>
-            </TouchableOpacity>
-            <TouchableOpacity
-              activeOpacity={0.8}
-              style={styles.optionBtn}
-              onPress={() => PhotoFromGalleryHandler('photo')}>
-              <View>
-                <Text style={[styles.text, {marginTop: 0, color: '#7465B6'}]}>
-                  Choose From Gallery
-                </Text>
-              </View>
-            </TouchableOpacity>
-            <TouchableOpacity
-              activeOpacity={0.8}
-              style={styles.optionBtn}
-              onPress={CancelHandler}>
-              <View>
-                <Text style={[styles.text, {marginTop: 0, color: '#7465B6'}]}>
-                  Cancel
-                </Text>
-              </View>
-            </TouchableOpacity>
-          </View>
+        {isProdUploadBtnClicked ? (
+          <UploadOptions
+            visibility={true}
+            Cancel={CancelHandler}
+            Camera={TakePhotoHandler}
+            Gallery={PhotoFromGalleryHandler}
+            location={'product'}
+          />
         ) : null}
+
         <View
           style={{
             paddingHorizontal: wp * 0.03,
@@ -224,13 +278,13 @@ export default function ProductImages() {
             flexDirection: 'row',
           }}>
           <FlatList
-            data={imageList}
+            data={productImageList}
             renderItem={({item, index}) => {
               // return console.log(item.fileName);
-              const isCurrent = index === currIndex;
+              const isCurrent = item.uri === currUrl;
               return (
                 <TouchableOpacity
-                  onPress={() => setCurrIndex(index)}
+                  onPress={() => setCurrUrl(item.uri)}
                   key={item.fileName}
                   style={[
                     styles.smallBox,
@@ -269,27 +323,115 @@ export default function ProductImages() {
         <View style={{marginHorizontal: '5%'}}>
           <Text style={styles.text}>Products Details</Text>
           <View style={{flexDirection: 'row'}}>
-            <Text style={styles.sub}>Seller SKU ID</Text>
+            <Text style={styles.sub}>Product Brand</Text>
             <Text style={styles.imp}>*</Text>
           </View>
           <TextInput style={styles.Input}></TextInput>
           <Text style={styles.instructionText}>
-            Unique identifier for the product.
+            Your Brand Name If You Want to add.
           </Text>
-          <View style={{flexDirection: 'row'}}>
-            <Text style={styles.sub}>Style Code</Text>
-            <Text style={styles.imp}>*</Text>
+          <TouchableOpacity activeOpacity={0.8} onPress={LabUploadBtnHandler}>
+            <View style={styles.btn}>
+              <Text
+                style={{
+                  color: 'white',
+                  fontWeight: 'bold',
+                  fontSize: wp * 0.04,
+                }}>
+                Upload Brand Lable
+              </Text>
+            </View>
+          </TouchableOpacity>
+          {isLabUploadBtnClicked ? (
+            <UploadOptions
+              visibility={true}
+              Cancel={CancelHandler}
+              Camera={TakePhotoHandler}
+              Gallery={PhotoFromGalleryHandler}
+              location={'lable'}
+            />
+          ) : null}
+
+          <View
+            style={{
+              paddingHorizontal: 0,
+              justifyContent: 'center',
+              alignItems: 'center',
+              flexDirection: 'row',
+            }}>
+            <FlatList
+              data={lableImageList}
+              renderItem={({item, index}) => {
+                // return console.log(item.fileName);
+                const isCurrent = item.uri === currUrl;
+                return (
+                  <TouchableOpacity
+                    onPress={() => setCurrUrl(item.uri)}
+                    key={item.fileName}
+                    style={[
+                      styles.smallBox,
+                      isCurrent
+                        ? {
+                            borderWidth: 4,
+                            borderStyle: 'solid',
+                            borderColor: '#3F2B96',
+                          }
+                        : null,
+                    ]}>
+                    <Image
+                      source={{
+                        uri: item.uri,
+                      }}
+                      resizeMode="cover"
+                      style={[
+                        {
+                          height: hp * 0.055,
+                          width: hp * 0.055,
+                          borderRadius: wp * 0.01,
+
+                          alignSelf: 'center',
+                        },
+                        isCurrent
+                          ? {height: hp * 0.052, width: hp * 0.052}
+                          : null,
+                      ]}
+                    />
+                  </TouchableOpacity>
+                );
+              }}
+              horizontal
+            />
           </View>
-          <TextInput style={styles.Input}></TextInput>
-          <Text style={styles.instructionText}>
-            Style Code remains same for all sizes or variants of this product.
-          </Text>
           <View style={{flexDirection: 'row'}}>
             <Text style={styles.sub}>Product Title</Text>
             <Text style={styles.imp}>*</Text>
           </View>
           <TextInput style={styles.Input}></TextInput>
           <Text style={styles.instructionText}>Name of the product.</Text>
+          <View style={{flexDirection: 'row'}}>
+            <Text style={styles.sub}>Product Description</Text>
+            <Text style={styles.imp}>*</Text>
+          </View>
+          <TextInput style={styles.Input}></TextInput>
+          <Text style={styles.instructionText}>
+            You can tell something about the product here.
+          </Text>
+          <View style={{flexDirection: 'row'}}>
+            <Text style={styles.sub}>MRP</Text>
+            <Text style={styles.imp}>*</Text>
+          </View>
+          <TextInput style={styles.Input}></TextInput>
+          <Text style={styles.instructionText}>
+            Maximum Retail Price of the product.
+          </Text>
+          <View style={{flexDirection: 'row'}}>
+            <Text style={styles.sub}>Your Selling Price</Text>
+            <Text style={styles.imp}>*</Text>
+          </View>
+          <TextInput style={styles.Input}></TextInput>
+          <Text style={styles.instructionText}>
+            Price at which you want to sell the product.
+          </Text>
         </View>
       </View>
     </ScrollView>
@@ -298,9 +440,9 @@ export default function ProductImages() {
 
 const styles = StyleSheet.create({
   Box: {
-    height: hp * 0.22,
-    width: '90%',
-    marginTop: '1%',
+    height: hp * 0.2,
+    width: wp * 0.55,
+    marginTop: wp * 0.02,
     borderRadius: wp * 0.01,
     borderStyle: 'dashed',
     justifyContent: 'center',
@@ -310,8 +452,8 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
   },
   BoxImg: {
-    height: hp * 0.2,
-    width: '90%',
+    height: hp * 0.19,
+    width: wp * 0.54,
   },
   smallBox: {
     height: hp * 0.056,
@@ -327,7 +469,7 @@ const styles = StyleSheet.create({
   btn: {
     height: hp * 0.05,
     alignItems: 'center',
-    width: '84%',
+    width: wp * 0.84,
     alignSelf: 'center',
     marginTop: '4%',
 
@@ -340,7 +482,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   Input: {
-    height: '12%',
+    height: hp * 0.055,
     borderWidth: 1,
     width: '100%',
 
@@ -373,18 +515,19 @@ const styles = StyleSheet.create({
     fontSize: wp * 0.025,
   },
   optionContainer: {
-    position: 'absolute',
+    // position: 'absolute',
     backgroundColor: 'white',
-    bottom: 0,
+    marginTop: wp * 0.01,
     alignSelf: 'center',
     justifyContent: 'center',
+    borderRadius: wp * 0.02,
     alignItems: 'center',
-    zIndex: 100,
-    elevation: 6,
+    // zIndex: 100,
+    // elevation: 6,
   },
   optionBtn: {
     height: hp * 0.072,
-    width: wp * 1,
+    width: wp * 0.82,
     justifyContent: 'center',
     alignItems: 'center',
     // borderRadius: wp * 0.02,

@@ -9,6 +9,7 @@ import {
   StyleSheet,
   FlatList,
   Image,
+  TextInput,
 } from 'react-native';
 
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -47,6 +48,11 @@ const wp = Dimensions.get('window').width;
 const hp = Dimensions.get('window').height;
 function RequestedList() {
   const [allSelected, setAllSelected] = useState(false);
+  const [text, setText] = useState('');
+
+  function searchHandler(newText) {
+    setText(newText);
+  }
 
   function allSelectionHandler() {
     setAllSelected(!allSelected);
@@ -55,6 +61,33 @@ function RequestedList() {
   return (
     <SafeAreaView style={styles.rootContainer}>
       <ScrollView>
+        <View
+          style={{
+            marginTop: wp * 0.03,
+            marginBottom: wp * 0.01,
+            justifyContent: 'center',
+            alignItems: 'center',
+            width: wp * 0.85,
+            alignSelf: 'center',
+            flexDirection: 'row',
+            borderRadius: wp * 0.02,
+            borderWidth: 1,
+            borderColor: '#DADADA',
+            backgroundColor: 'white',
+          }}>
+          <Icon name="card-search-outline" size={wp * 0.08} color="#DADADA" />
+          <TextInput
+            placeholder="Search for product"
+            placeholderTextColor={'#DADADA'}
+            style={{
+              height: wp * 0.1,
+              width: '85%',
+              color: 'black',
+            }}
+            onChangeText={searchHandler}
+            value={text}
+          />
+        </View>
         <View style={styles.selectionBar}>
           <TouchableOpacity
             onPress={allSelectionHandler}

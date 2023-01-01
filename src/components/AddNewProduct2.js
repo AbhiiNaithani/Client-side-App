@@ -19,66 +19,66 @@ import PrdoductDescription from './PrdoductDescription';
 const wp = Dimensions.get('window').width;
 const hp = Dimensions.get('window').height;
 
-const ProductImagesRoute = () => (
-  <View style={{flex: 1, backgroundColor: 'white'}}>
-    <ProductImages />
-  </View>
-);
+// const ProductImagesRoute = () => (
+//   <View style={{flex: 1, backgroundColor: 'white'}}>
+//     <ProductImages />
+//   </View>
+// );
 
-const PriceAndStockRoute = () => (
-  <View style={{flex: 1, backgroundColor: 'white'}}>
-    <PriceAndStock />
-  </View>
-);
+// const PriceAndStockRoute = () => (
+//   <View style={{flex: 1, backgroundColor: 'white'}}>
+//     <PriceAndStock />
+//   </View>
+// );
 
-const ShippingRoute = () => (
-  <View style={{flex: 1, backgroundColor: 'white'}}>
-    <Shipping />
-  </View>
-);
-const ProductDescriptionRoute = () => (
-  <View style={{flex: 1, backgroundColor: 'white'}}>
-    <PrdoductDescription />
-  </View>
-);
+// const ShippingRoute = () => (
+//   <View style={{flex: 1, backgroundColor: 'white'}}>
+//     <Shipping />
+//   </View>
+// );
+// const ProductDescriptionRoute = () => (
+//   <View style={{flex: 1, backgroundColor: 'white'}}>
+//     <PrdoductDescription />
+//   </View>
+// );
 
 export default function AddNewProduct2() {
-  const [index, setIndex] = useState(0);
-  const [routes] = useState([
-    {key: 'first', title: 'Product Images'},
-    {key: 'second', title: 'Price and Stock'},
-    {key: 'third', title: 'Shipping'},
-    {key: 'fourth', title: 'Product Description'},
-  ]);
+  // const [index, setIndex] = useState(0);
+  // const [routes] = useState([
+  //   {key: 'first', title: 'Product Images'},
+  //   {key: 'second', title: 'Price and Stock'},
+  //   {key: 'third', title: 'Shipping'},
+  //   {key: 'fourth', title: 'Product Description'},
+  // ]);
 
-  const renderScene = SceneMap({
-    first: ProductImagesRoute,
-    second: PriceAndStockRoute,
-    third: ShippingRoute,
-    fourth: ProductDescriptionRoute,
-  });
+  // const renderScene = SceneMap({
+  //   first: ProductImagesRoute,
+  //   second: PriceAndStockRoute,
+  //   third: ShippingRoute,
+  //   fourth: ProductDescriptionRoute,
+  // });
 
-  const renderTabBar = props => (
-    <TabBar
-      {...props}
-      indicatorStyle={{backgroundColor: '#7465B6'}}
-      activeColor="#7465B6"
-      inactiveColor="#929292"
-      style={{
-        backgroundColor: 'white',
-        height: hp * 0.06,
-      }}
-      labelStyle={{
-        fontFamily: 'Montserrat',
-        fontWeight: 'bold',
-        textAlign: 'center',
-        fontSize: wp * 0.0202,
-        margin: 0,
-        padding: 0,
-        textTransform: 'none',
-      }}
-    />
-  );
+  // const renderTabBar = props => (
+  //   <TabBar
+  //     {...props}
+  //     indicatorStyle={{backgroundColor: '#7465B6'}}
+  //     activeColor="#7465B6"
+  //     inactiveColor="#929292"
+  //     style={{
+  //       backgroundColor: 'white',
+  //       height: hp * 0.06,
+  //     }}
+  //     labelStyle={{
+  //       fontFamily: 'Montserrat',
+  //       fontWeight: 'bold',
+  //       textAlign: 'center',
+  //       fontSize: wp * 0.0202,
+  //       margin: 0,
+  //       padding: 0,
+  //       textTransform: 'none',
+  //     }}
+  //   />
+  // );
 
   return (
     <SafeAreaView style={{flex: 1, backgroundColor: 'white'}}>
@@ -131,14 +131,7 @@ export default function AddNewProduct2() {
         </View>
       </View>
 
-      <TabView
-        renderTabBar={renderTabBar}
-        navigationState={{index, routes}}
-        renderScene={renderScene}
-        onIndexChange={setIndex}
-        initialLayout={{width: wp}}
-        style={{backgroundColor: 'black'}}
-      />
+      <ProductImages />
     </SafeAreaView>
   );
 }
